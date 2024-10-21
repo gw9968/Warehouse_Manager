@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Warehouse_Manager.Models.Log>
+
+@{
+    ViewData["Title"] = "Logi pracowników";
+}
+
+<div class="container mt-5">
+    <h1>Logi pracowników</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Pracownik ID</th>
+                <th>Produkt ID</th>
+                <th>Akcja</th>
+                <th>Czas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var log in Model)
+            {
+                <tr>
+                    <td>@log.Id</td>
+                    <td>@log.PracownikId</td>
+                    <td>@log.ProduktId</td>
+                    <td>@log.Akcja</td>
+                    <td>@log.CzasAkcji.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

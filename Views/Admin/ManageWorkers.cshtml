@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Warehouse_Manager.Models.Pracownik>
+
+@{
+    ViewData["Title"] = "Zarządzaj pracownikami";
+}
+
+<div class="container mt-5">
+    <h1>Zarządzaj pracownikami</h1>
+
+    <a href="@Url.Action("AddWorker", "Admin")" class="btn btn-primary mb-3">Dodaj pracownika</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Login</th>
+                <th>Data zatrudnienia</th>
+                <th>Akcja</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var worker in Model)
+            {
+                <tr>
+                    <td>@worker.Id</td>
+                    <td>@worker.Imie</td>
+                    <td>@worker.Nazwisko</td>
+                    <td>@worker.Login</td>
+                    <td>@worker.DataZatrudnienia</td>
+                    <td>
+                        <a href="@Url.Action("DeleteWorker", "Admin", new { id = worker.Id })" class="btn btn-danger">Usuń</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
