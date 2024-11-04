@@ -1,16 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Warehouse_Manager.Models;
 
-namespace Warehouse_Manager.Models
+namespace Warehouse_Manager
 {
     public class BaseConfiguration : DbContext
     {
+
+        public BaseConfiguration(DbContextOptions<BaseConfiguration> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Admin> Administratorzy { get; set; }
         public DbSet<Pracownik> Pracownicy { get; set; }
         public DbSet<Produkt> Produkty { get; set; }
         public DbSet<Log> Logi { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-      
+
             modelBuilder.Entity<Pracownik>(entity =>
             {
                 entity.HasKey(p => p.Id);
@@ -55,9 +63,5 @@ namespace Warehouse_Manager.Models
             });
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS01;Database=Warehouse_Manager;Trusted_Connection=True;TrustServerCertificate=True;");
-        }
     }
 }

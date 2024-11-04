@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
 namespace Warehouse_Manager
 {
     public class Program
@@ -9,8 +12,13 @@ namespace Warehouse_Manager
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<BaseConfiguration>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("ConnectionToBase"))
+                );
+
+
             // Add session services
-            builder.Services.AddSession(options =>
+            builder.Services.AddSession(options => 
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
                 options.Cookie.HttpOnly = true;
@@ -39,7 +47,7 @@ namespace Warehouse_Manager
             // Define the default route for login
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Login}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
