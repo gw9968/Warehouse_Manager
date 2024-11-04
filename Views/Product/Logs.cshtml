@@ -6,7 +6,7 @@
 
 <h1>Lista logów</h1>
 
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -24,28 +24,28 @@
             <th>
                 @Html.DisplayNameFor(model => model.CzasAkcji)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PracownikId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProduktId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Akcja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CzasAkcji)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PracownikId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProduktId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Akcja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CzasAkcji)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

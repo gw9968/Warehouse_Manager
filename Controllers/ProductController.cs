@@ -7,6 +7,7 @@ namespace Warehouse_Manager.Controllers
     public class ProductController : Controller
     {
         private readonly BaseConfiguration _baza;
+
         public ProductController(BaseConfiguration baza)
         {
             _baza = baza;
@@ -46,13 +47,13 @@ namespace Warehouse_Manager.Controllers
 
             var logi = new Log
             {
-                PracownikId = 1,
+                PracownikId = HttpContext.Session.GetInt32("UserId").Value,
                 ProduktId = produkt.Id,
                 Akcja = "Utworzono",
                 CzasAkcji = DateTime.Now,
             };
 
-            await _baza.Logi.AddAsync(logi);  
+            await _baza.Logi.AddAsync(logi);
             await _baza.SaveChangesAsync();
 
             return RedirectToAction("List", "Product");
@@ -61,9 +62,12 @@ namespace Warehouse_Manager.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var produkty = await _baza.Produkty.ToListAsync();
+            var produkty = await _baza.Produkty
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
             return View(produkty);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -88,13 +92,12 @@ namespace Warehouse_Manager.Controllers
 
                 var logi = new Log
                 {
-                    PracownikId = 1,
-                    ProduktId = p.Id, 
+                    PracownikId = HttpContext.Session.GetInt32("UserId").Value,
+                    ProduktId = p.Id,
                     Akcja = "Zmodyfikowano",
                     CzasAkcji = DateTime.Now,
                 };
 
-              
                 await _baza.Logi.AddAsync(logi);
                 await _baza.SaveChangesAsync();
             }
@@ -103,20 +106,28 @@ namespace Warehouse_Manager.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Produkt produkt)
+        public async Task<IActionResult> Delete(int id)
         {
-            var p = await _baza.Produkty.
-                AsNoTracking().
-                FirstOrDefaultAsync(x => x.Id == produkt.Id);
+            var produkt = await _baza.Produkty
+                .FirstOrDefaultAsync(x => x.Id == id);
 
-            if (p is not null)
+            if (produkt is not null)
             {
-                _baza.Produkty.Remove(produkt);
+                var logi = new Log
+                {
+                    PracownikId = HttpContext.Session.GetInt32("UserId").Value,
+                    ProduktId = produkt.Id,
+                    Akcja = "Usunięto",
+                    CzasAkcji = DateTime.Now,
+                };
+
+                await _baza.Logi.AddAsync(logi);
+
+                produkt.IsDeleted = true;
                 await _baza.SaveChangesAsync();
             }
 
             return RedirectToAction("List", "Product");
         }
-    
     }
 }

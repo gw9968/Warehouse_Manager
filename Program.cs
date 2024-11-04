@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Warehouse_Manager
 {
@@ -9,25 +8,20 @@ namespace Warehouse_Manager
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<BaseConfiguration>(options => options.UseSqlServer(
-                builder.Configuration.GetConnectionString("ConnectionToBase"))
-                );
+            builder.Services.AddDbContext<BaseConfiguration>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionToBase")));
 
-
-            // Add session services
-            builder.Services.AddSession(options => 
+            builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -39,15 +33,13 @@ namespace Warehouse_Manager
 
             app.UseRouting();
 
-            // Enable session middleware
             app.UseSession();
 
             app.UseAuthorization();
 
-            // Define the default route for login
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Login}/{id?}");
 
             app.Run();
         }

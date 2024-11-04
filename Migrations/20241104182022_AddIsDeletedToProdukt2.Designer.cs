@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse_Manager;
 
@@ -11,9 +12,11 @@ using Warehouse_Manager;
 namespace Warehouse_Manager.Migrations
 {
     [DbContext(typeof(BaseConfiguration))]
-    partial class BaseConfigurationModelSnapshot : ModelSnapshot
+    [Migration("20241104182022_AddIsDeletedToProdukt2")]
+    partial class AddIsDeletedToProdukt2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

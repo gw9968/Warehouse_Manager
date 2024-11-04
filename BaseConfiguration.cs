@@ -10,7 +10,7 @@ namespace Warehouse_Manager
         {
 
         }
-
+        
         public DbSet<Admin> Administratorzy { get; set; }
         public DbSet<Pracownik> Pracownicy { get; set; }
         public DbSet<Produkt> Produkty { get; set; }
@@ -18,7 +18,6 @@ namespace Warehouse_Manager
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Pracownik>(entity =>
             {
                 entity.HasKey(p => p.Id);
@@ -44,7 +43,7 @@ namespace Warehouse_Manager
                 entity.HasMany(p => p.Logi)
                       .WithOne(l => l.Produkt)
                       .HasForeignKey(l => l.ProduktId)
-                      .OnDelete(DeleteBehavior.Cascade);
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Log>(entity =>
@@ -59,9 +58,9 @@ namespace Warehouse_Manager
 
                 entity.HasOne(l => l.Produkt)
                       .WithMany(p => p.Logi)
-                      .HasForeignKey(l => l.ProduktId);
+                      .HasForeignKey(l => l.ProduktId)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
         }
-
     }
 }
