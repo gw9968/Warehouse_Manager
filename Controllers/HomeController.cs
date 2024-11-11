@@ -37,6 +37,15 @@ namespace Warehouse_Manager.Controllers
         {
             if (ModelState.IsValid)
             {
+                var admin = await _baza.Administratorzy
+                    .FirstOrDefaultAsync(a => a.Login == model.Login && a.Haslo == model.Haslo);
+
+                if (admin != null)
+                {
+                    HttpContext.Session.SetInt32("AdminId", admin.Id);
+                    return RedirectToAction("List", "Worker");
+                }
+
                 var user = await _baza.Pracownicy
                     .FirstOrDefaultAsync(u => u.Login == model.Login && u.Haslo == model.Haslo);
 

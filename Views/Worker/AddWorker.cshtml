@@ -6,37 +6,38 @@
 
 @model Warehouse_Manager.Models.WorkerDTO
 
+<div class="box">
+    <h1>Dodaj produkt</h1>
 
-<h1>Dodaj produkt</h1>
+    <form method="post">
 
-<form method="post">
+        <div class="mt-3">
+            <label class="form-label">Imię</label>
+            <input type="text" class="form-control" asp-for="Imie" />
+            <span asp-validation-for="Imie" class="text-danger"></span>
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Imię</label>
-        <input type="text" class="form-control" asp-for="Imie" />
-        <span asp-validation-for="Imie" class="text-danger"></span>
-    </div>
+        <div class="mt-3">
+            <label class="form-label">Nazwisko</label>
+            <input type="text" class="form-control" asp-for="Nazwisko" />
+            <span asp-validation-for="Nazwisko" class="text-danger"></span>
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Nazwisko</label>
-        <input type="text" class="form-control" asp-for="Nazwisko" />
-        <span asp-validation-for="Nazwisko" class="text-danger"></span>
-    </div>
+        <div class="mt-3">
+            <label class="form-label">Login</label>
+            <input type="text" class="form-control" asp-for="Login" />
+            <span asp-validation-for="Login" class="text-danger"></span>
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Login</label>
-        <input type="text" class="form-control" asp-for="Login" />
-        <span asp-validation-for="Login" class="text-danger"></span>
-    </div>
+        <div class="mt-3">
+            <label class="form-label">Hasło</label>
+            <input type="text" class="form-control" asp-for="Haslo" />
+            <span asp-validation-for="Haslo" class="text-danger"></span>
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Hasło</label>
-        <input type="text" class="form-control" asp-for="Haslo" />
-        <span asp-validation-for="Haslo" class="text-danger"></span>
-    </div>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </div>
 
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Dodaj</button>
-    </div>
-
-</form>
+    </form>
+</div>

@@ -6,37 +6,38 @@
 
 @model Warehouse_Manager.Models.ProductDTO
 
+<div class="box">
+    <h1>Dodaj produkt</h1>
 
-<h1>Dodaj produkt</h1>
+    <form method="post">
 
-<form method="post">
+        <div class="mt-3">
+            <label class="form-label">Nazwa</label>
+            <input type="text" class="form-control" asp-for="Nazwa" />
+            <span asp-validation-for="Nazwa" class="text-danger"></span>
+        </div>
 
-<div class="mt-3">
-    <label class="form-label">Nazwa</label>
-    <input type="text" class="form-control" asp-for="Nazwa"/>
-    <span asp-validation-for="Nazwa" class="text-danger"></span>
+        <div class="mt-3">
+            <label class="form-label">Cena</label>
+            <input type="text" class="form-control" asp-for="Cena" />
+            <span asp-validation-for="Cena" class="text-danger"></span>
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Ilość</label>
+            <input type="text" class="form-control" asp-for="Ilosc" />
+            <span asp-validation-for="Ilosc" class="text-danger"></span>
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Kategoria</label>
+            <input type="text" class="form-control" asp-for="Kategoria" />
+            <span asp-validation-for="Kategoria" class="text-danger"></span>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </div>
+
+    </form>
 </div>
-
-<div class="mt-3">
-    <label class="form-label">Cena</label>
-    <input type="text" class="form-control" asp-for="Cena"/>
-        <span asp-validation-for="Cena" class="text-danger"></span>
-</div>
-
-<div class="mt-3">
-    <label class="form-label">Ilość</label>
-    <input type="text" class="form-control" asp-for="Ilosc" />
-        <span asp-validation-for="Ilosc" class="text-danger"></span>
-</div>
-
-<div class="mt-3">
-    <label class="form-label">Kategoria</label>
-    <input type="text" class="form-control" asp-for="Kategoria" />
-    <span asp-validation-for="Kategoria" class="text-danger"></span>
-</div>
-
-<div class="mt-3">
-    <button type="submit" class="btn btn-primary">Dodaj</button>
-</div>
-
-</form>

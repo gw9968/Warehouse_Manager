@@ -7,49 +7,52 @@
 
 @model Warehouse_Manager.Models.Pracownik
 
+<div class="box">
+    <h1>Edytuj dane pracownika</h1>
 
-<h1>Edytuj dane pracownika</h1>
+    @if (Model is null)
+    {
+        <p>Nie ma takiego pracownika!</p>
 
-@if (Model is null)
-{
-    <p>Nie ma takiego pracownika!</p>
+    }
+    else
+    {
+        <form method="post">
 
-}
-else
-{
-    <form method="post">
+            <div class="mt-3">
+                <label class="form-label">Id</label>
+                <input type="text" class="form-control" asp-for="Id" readonly />
+            </div>
 
-        <div class="mt-3">
-            <label class="form-label">Id</label>
-            <input type="text" class="form-control" asp-for="Id" readonly />
-        </div>
+            <div class="mt-3">
+                <label class="form-label">Imię</label>
+                <input type="text" class="form-control" asp-for="Imie" />
+            </div>
 
-        <div class="mt-3">
-            <label class="form-label">Imię</label>
-            <input type="text" class="form-control" asp-for="Imie" />
-        </div>
+            <div class="mt-3">
+                <label class="form-label">Nazwisko</label>
+                <input type="text" class="form-control" asp-for="Nazwisko" />
+            </div>
 
-        <div class="mt-3">
-            <label class="form-label">Nazwisko</label>
-            <input type="text" class="form-control" asp-for="Nazwisko" />
-        </div>
+            <div class="mt-3">
+                <label class="form-label">Login</label>
+                <input type="text" class="form-control" asp-for="Login" />
+            </div>
 
-        <div class="mt-3">
-            <label class="form-label">Login</label>
-            <input type="text" class="form-control" asp-for="Login" />
-        </div>
+            <div class="mt-3">
+                <label class="form-label">Hasło</label>
+                <input type="text" class="form-control" asp-for="Haslo" />
+            </div>
 
-        <div class="mt-3">
-            <label class="form-label">Hasło</label>
-            <input type="text" class="form-control" asp-for="Haslo" />
-        </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Edytuj</button>
 
-        <div class="mt-3">
-            <button type="submit" class="btn btn-primary">Edytuj</button>
+                <button type="submit" class="btn btn-danger" asp-controller="Worker" asp-action="Delete">Usuń</button>
+            </div>
 
-            <button type="submit" class="btn btn-danger" asp-controller="Worker" asp-action="Delete">Usuń</button>
-        </div>
+        </form>
+    }
 
-    </form>
-}
+
+</div>
 
